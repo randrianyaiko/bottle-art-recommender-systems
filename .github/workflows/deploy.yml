@@ -30,7 +30,7 @@ jobs:
       run: chmod +x scripts/*.sh
 
     - name: Build and Upload Layers
-      run: cd scripts && build-layers.sh
+      run: cd scripts && ./build-layers.sh
 
   build-lambdas:
     name: Build Lambda Packages
