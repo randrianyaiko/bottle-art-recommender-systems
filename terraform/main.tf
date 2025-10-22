@@ -42,7 +42,6 @@ resource "aws_lambda_function" "data_processing_lambda" {
   memory_size   = 128
   s3_bucket     = var.lambda_code_bucket
   s3_key        = "lambda_code/code.zip"
-  filename         = "code.zip"
 
   layers = [aws_lambda_layer_version.common_layer.arn]
 
