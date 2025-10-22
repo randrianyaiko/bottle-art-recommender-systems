@@ -19,13 +19,11 @@ variable "lambda_layers_bucket" {
 variable "authorizer_layer_version" {
   description = "Authorizer layer version"
   type        = string
-  default     = "latest"
 }
 
 variable "common_layer_version" {
   description = "Common layer version"
   type        = string
-  default     = "latest"
 }
 
 variable "environment" {

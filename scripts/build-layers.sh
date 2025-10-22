@@ -4,7 +4,6 @@ set -e  # Exit on any error
 
 # Configuration
 LAYER_BUCKET="lambda-layers-bucket-202510"
-COMMIT_SHA="latest"
 AWS_REGION="eu-central-1"
 
 echo "🔨 Building Lambda layers with commit SHA: $COMMIT_SHA"
