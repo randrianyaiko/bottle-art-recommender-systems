@@ -63,3 +63,9 @@ variable "jwt_secret" {
   type        = string
   sensitive   = true
 }
+
+variable "lambda_code_bucket" {
+  description = "S3 bucket for lambda code"
+  type        = string
+  default     = "lambda-function-codes-202510261"
+}

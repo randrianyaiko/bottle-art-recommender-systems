@@ -40,9 +40,9 @@ resource "aws_lambda_function" "data_processing_lambda" {
   runtime       = "python3.10"
   timeout       = 30
   memory_size   = 128
-
+  s3_bucket     = var.lambda_code_bucket
+  s3_key        = "lambda_code/code.zip"
   filename         = "code.zip"
-  source_code_hash = filebase64sha256("code.zip")
 
   layers = [aws_lambda_layer_version.common_layer.arn]
 
@@ -63,8 +63,8 @@ resource "aws_lambda_function" "recommendation_lambda" {
   timeout       = 30
   memory_size   = 128
 
-  filename         = "code.zip"  # You'll upload this via GitHub Actions
-  source_code_hash = filebase64sha256("code.zip")
+  s3_bucket     = var.lambda_code_bucket
+  s3_key        = "lambda_code/code.zip"
 
   layers = [aws_lambda_layer_version.common_layer.arn]
 
@@ -85,8 +85,8 @@ resource "aws_lambda_function" "authorizer_lambda" {
   timeout       = 30
   memory_size   = 128
 
-  filename         = "code.zip"  # You'll upload this via GitHub Actions
-  source_code_hash = filebase64sha256("code.zip")
+  s3_bucket     = var.lambda_code_bucket
+  s3_key        = "lambda_code/code.zip"
 
   layers = [aws_lambda_layer_version.authorizer_layer.arn]
 
