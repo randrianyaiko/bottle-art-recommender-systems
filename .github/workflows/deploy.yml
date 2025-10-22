@@ -7,7 +7,7 @@ on:
 env:
   AWS_REGION: eu-central-1
   TF_VERSION: 1.5.0
-  COMMIT_SHA: ${{ github.sha }}
+  COMMIT_SHA: latest
 
 jobs:
   deploy-layers:
@@ -88,8 +88,8 @@ jobs:
       working-directory: terraform
       run: |
         terraform plan \
-          -var="authorizer_layer_version=${{ github.sha }}" \
-          -var="common_layer_version=${{ github.sha }}" \
+          -var="authorizer_layer_version=${{ env.COMMIT_SHA }}" \
+          -var="common_layer_version=${{ env.COMMIT_SHA }}" \
           -var="qdrant_url=${{ secrets.QDRANT_URL }}" \
           -var="qdrant_api_key=${{ secrets.QDRANT_API_KEY }}" \
           -var="jwt_secret=${{ secrets.JWT_SECRET }}"
@@ -98,8 +98,8 @@ jobs:
       working-directory: terraform
       run: |
         terraform apply -auto-approve \
-          -var="authorizer_layer_version=${{ github.sha }}" \
-          -var="common_layer_version=${{ github.sha }}" \
+          -var="authorizer_layer_version=${{ env.COMMIT_SHA }}" \
+          -var="common_layer_version=${{ env.COMMIT_SHA }}" \
           -var="qdrant_url=${{ secrets.QDRANT_URL }}" \
           -var="qdrant_api_key=${{ secrets.QDRANT_API_KEY }}" \
           -var="jwt_secret=${{ secrets.JWT_SECRET }}"
