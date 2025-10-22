@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  recommender:
+    build: .
+    container_name: my-lambda
+    ports:
+      - "8000:8080"   # Map Lambda RIE port
+    env_file:
+      - .env          # Load environment variables
+    mem_limit: 1024m   # Limit container memory to 512 MB
+    command: ["lambda_handlers.recommender.handler"]
+  ingestor:
+    build: .
+    container_name: my-ingestor
+    ports:
+      - "8001:8080"   # Map Lambda RIE port
+    env_file:
+      - .env          # Load environment variables
+    mem_limit: 1024m   # Limit container memory to 512 MB
+    command: ["lambda_handlers.event_processor.handler"]
+  
+  authorizer:
+    build: .
+    container_name: my-authorizer
+    ports:
+      - "8002:8080"   # Map Lambda RIE port
+    env_file:
+      - .env          # Load environment variables
+    mem_limit: 1024m   # Limit container memory to 512 MB
+    command: ["lambda_handlers.authorizer.handler"]
