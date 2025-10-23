@@ -20,6 +20,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -38,11 +43,16 @@ jobs:
     environment: dev
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    needs: [deploy-layers]   # waits if layers are being built, otherwise runs immediately
+    needs: [deploy-layers]
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -62,11 +72,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: [build-lambdas, deploy-layers]
-    if: always() && github.ref == 'refs/heads/master'  # run even if deploy-layers was skipped
+    if: always() && github.ref == 'refs/heads/master'
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
